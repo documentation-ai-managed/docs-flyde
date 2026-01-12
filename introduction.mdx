@@ -1,0 +1,102 @@
+---
+title: Introduction to Flyde
+description: Discover Flyde, a powerful documentation management platform designed to help teams organize and maintain project documentation efficiently.
+---
+
+## Overview
+
+Flyde empowers you to create, organize, and manage your project's documentation in one centralized space. You can build structured docs sites with MDX, collaborate with your team, and keep everything up-to-date effortlessly. Whether you manage API references, user guides, or onboarding materials, Flyde streamlines the process so you focus on content, not complexity.
+
+With features like version control integration, search, and customizable themes, Flyde scales from small projects to enterprise needs. Start building your docs today and see how it transforms your workflow.
+
+<Callout kind="info">
+  Flyde supports MDX, so you write docs with familiar Markdown and React components.
+</Callout>
+
+## Key Features
+
+Flyde offers powerful tools to organize your documentation effectively.
+
+<Columns cols={3}>
+  <Card title="Structured Pages" icon="book-open" href="/docs/pages">
+    Create nested pages with YAML frontmatter, headings, and rich components for professional docs sites.
+  </Card>
+  <Card title="Collaboration" icon="users" href="/docs/collaboration">
+    Invite team members, review changes, and merge updates seamlessly.
+  </Card>
+  <Card title="Search & Navigation" icon="search" href="/docs/search">
+    Full-text search and sidebar navigation help users find content quickly.
+  </Card>
+</Columns>
+
+## Quick Navigation Guide
+
+Get started with Flyde in minutes using these steps.
+
+<Steps>
+  <Step title="Create Your Space" icon="plus">
+    Log in to your Flyde dashboard at `https://dashboard.example.com` and create a new documentation space for your project.
+  </Step>
+  <Step title="Add Your First Page" icon="file-text">
+    Click "New Page" and use the MDX editor to write content. Add frontmatter with `title` and `description`.
+  </Step>
+  <Step title="Organize with Folders" icon="folder">
+    Drag pages into folders to build your site structure. Preview changes live.
+  </Step>
+  <Step title="Publish" icon="globe">
+    Deploy your docs site with one click. Share the live URL with your team.
+  </Step>
+</Steps>
+
+## Who Should Use Flyde
+
+Flyde suits various teams and use cases.
+
+<Tabs>
+  <Tab title="Developers & Engineers" icon="code">
+    Document APIs, SDKs, and deployment guides with code examples and interactive components.
+  </Tab>
+  <Tab title="Product Teams" icon="package">
+    Build onboarding flows, changelogs, and feature roadmaps with visual Steps and Cards.
+  </Tab>
+  <Tab title="Support & Customer Success" icon="help-circle">
+    Create self-service FAQs using Expandable sections and searchable knowledge bases.
+  </Tab>
+</Tabs>
+
+<CodeGroup tabs="JavaScript,Python">
+```javascript
+// Example: Embed Flyde docs widget
+import { FlydeDocs } from '@flyde/widget';
+
+<FlydeDocs spaceId="your-space-id" theme="light" />
+```
+
+```python
+# Example: Fetch docs via API
+import requests
+
+response = requests.get(
+  'https://api.example.com/v1/spaces/your-space-id/pages',
+  headers={'Authorization': 'Bearer YOUR_API_KEY'}
+)
+print(response.json())
+```
+</CodeGroup>
+
+## Next Steps
+
+Ready to dive deeper?
+
+<Columns cols={2}>
+  <Card title="Quickstart" icon="zap" href="/quickstart">
+    Set up your first docs space in under 5 minutes.
+  </Card>
+  <Card title="Authentication" icon="shield" href="/authentication">
+    Secure your spaces with API keys and team access.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Explore the [changelog](/changelog) for the latest updates and features.
+</Callout>

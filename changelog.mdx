@@ -1,0 +1,161 @@
+---
+title: Changelog
+description: Track the latest updates, improvements, and bug fixes in Flyde.
+---
+
+## Stay Up to Date
+
+Flyde releases updates regularly to add new features, improve performance, and fix issues. You receive notifications in your dashboard and via email when new versions launch. Check this changelog for details on each release.
+
+<Callout kind="tip">
+  Enable auto-updates in your Flyde settings to get the latest features without manual intervention.
+</Callout>
+
+## Recent Changes
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Added real-time collaboration for shared flow editing with multiple users.
+- Introduced custom node templates you can save and reuse across projects.
+
+## Improvements
+
+- Enhanced flow rendering performance by `>30%` for complex graphs.
+- Updated UI with better dark mode support and accessibility improvements.
+
+## Bug Fixes
+
+- Fixed drag-and-drop issues on touch devices.
+- Resolved crash when importing malformed JSON flows.
+
+</Update>
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Integrated webhook support for triggering flows from external events.
+- Added export to SVG and PDF for sharing flow diagrams.
+
+## Bug Fixes
+
+- Patched security vulnerability in flow execution sandbox (CVE-2024-5678).
+- Fixed node connection validation errors during runtime.
+
+## Improvements
+
+- Optimized memory usage for large flows with `100+` nodes.
+
+</Update>
+
+<Update label="2024-08-10" description="v1.0.0" tags={["breaking", "feature"]}>
+
+## Breaking Changes
+
+- Removed legacy `v0.x` node registry API. Migrate using the new `{registry}` endpoint.
+
+## New Features
+
+- Core visual flow editor with drag-and-drop node creation.
+- Built-in nodes for HTTP requests, data transformation, and database queries.
+- Full-screen editor mode and keyboard shortcuts.
+
+## Initial Setup
+
+- First stable release with complete API documentation.
+
+</Update>
+
+## Upgrading to the Latest Version
+
+Follow these steps to upgrade Flyde smoothly.
+
+<Steps>
+  <Step title="Backup Your Flows" icon="database">
+
+    Export all your projects to JSON:
+
+````javascript
+// Use the export API
+const flows = await flyde.exportAllFlows();
+console.log(flows);
+````
+
+  </Step>
+  <Step title="Update Package" icon="download">
+
+    <Tabs>
+      <Tab title="npm" icon="package">
+````bash
+npm install flyde@latest
+````
+      </Tab>
+      <Tab title="yarn" icon="package">
+````bash
+yarn add flyde@latest
+````
+      </Tab>
+    </Tabs>
+
+  </Step>
+  <Step title="Migrate Breaking Changes" icon="settings">
+
+    Update deprecated nodes:
+
+    <CodeGroup tabs="JavaScript,Python">
+```javascript
+// Old way (v0.x)
+const result = flyde.runFlow('legacy-flow', { input: data });
+
+// New way (v1.x)
+const result = await flyde.execute('my-flow-id', { input: data });
+```
+```python
+# Old
+result = flyde.run_flow('legacy-flow', input_data)
+
+# New
+result = flyde.execute_flow('my-flow-id', {'input': data})
+```
+    </CodeGroup>
+
+  </Step>
+  <Step title="Test and Deploy" icon="rocket">
+
+    Run your flows in a test environment before production.
+
+  </Step>
+</Steps>
+
+<Callout kind="alert">
+  For v1.0.0 breaking changes, review the migration guide in your dashboard.
+</Callout>
+
+## Previous Versions
+
+<Columns cols={3}>
+  <Card title="v0.9.x" icon="package" href="https://docs.example.com/changelog/v0.9">
+    Legacy features and deprecations.
+  </Card>
+  <Card title="v0.8.x" icon="package" href="https://docs.example.com/changelog/v0.8">
+    Performance optimizations.
+  </Card>
+  <Card title="Full Archive" icon="archive" href="/changelog/archive">
+    All historical releases.
+  </Card>
+</Columns>
+
+## Next Steps
+
+Explore these resources after upgrading:
+
+<Columns cols={2}>
+  <Card title="Quickstart" icon="zap" href="/quickstart">
+    Build your first flow in minutes.
+  </Card>
+  <Card title="Node Reference" icon="code" href="/nodes">
+    Full list of built-in nodes.
+  </Card>
+</Columns>

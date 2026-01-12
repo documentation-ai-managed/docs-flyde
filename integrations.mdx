@@ -1,0 +1,190 @@
+---
+title: Integrations with Flyde
+description: Connect Flyde to external tools and services to enhance your documentation workflow.
+---
+
+## Overview
+
+Flyde supports seamless integrations with Git repositories, third-party apps, webhooks, and its REST API. These connections automate documentation updates, sync content across platforms, and enable custom workflows. Start by navigating to the Integrations tab in your Flyde dashboard at `https://dashboard.example.com`.
+
+<Columns cols={3}>
+  <Card title="Git Sync" icon="git-branch" href="#git-sync">
+    Keep docs in sync with your repository.
+  </Card>
+  <Card title="App Connections" icon="plug" href="#app-connections">
+    Integrate with Slack and Jira.
+  </Card>
+  <Card title="Webhooks & API" icon="zap" href="#webhooks-api">
+    Automate updates and build custom tools.
+  </Card>
+</Columns>
+
+## Git Repository Synchronization
+
+Sync your Flyde documentation with Git repositories for version control and collaborative editing.
+
+<Steps>
+  <Step title="Connect Repository" icon="git-branch">
+    In Flyde dashboard, go to Integrations > Git Sync. Enter your repository URL like `https://github.com/your-org/your-docs-repo.git`.
+  </Step>
+  <Step title="Authenticate" icon="key">
+    Provide your GitHub personal access token as `YOUR_GITHUB_TOKEN`.
+  </Step>
+  <Step title="Configure Sync" icon="settings">
+    Select branches (e.g., `main`, `develop`) and sync direction (push/pull).
+  </Step>
+  <Step title="Enable Auto-Sync" icon="play">
+    Toggle auto-sync for commits to trigger updates.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Use branch protection rules in GitHub to prevent direct pushes to synced branches.
+</Callout>
+
+## Third-Party App Connections
+
+Connect Flyde to popular tools for notifications and issue tracking.
+
+<Tabs>
+  <Tab title="Slack" icon="message-circle">
+    Send documentation update notifications to Slack channels.
+    
+    <Steps>
+      <Step title="Get Slack Webhook">
+        Create an incoming webhook in your Slack workspace.
+      </Step>
+      <Step title="Add to Flyde">
+        Paste the webhook URL into Flyde's Slack integration settings.
+      </Step>
+    </Steps>
+    
+    Example payload:
+    
+    ````json
+    {
+      "text": "Flyde docs updated: New guide published"
+    }
+    ````
+  </Tab>
+  <Tab title="Jira" icon="package">
+    Link Flyde pages to Jira issues for better project tracking.
+    
+    <CodeGroup tabs="Configuration">
+      ```yaml
+      jira:
+        baseUrl: "https://your-company.atlassian.net"
+        username: "your-email@example.com"
+        apiToken: "YOUR_JIRA_TOKEN"
+      ```
+    </CodeGroup>
+    
+    Create issues directly from Flyde comments.
+  </Tab>
+</Tabs>
+
+## Setting Up Webhooks
+
+Webhooks enable real-time updates from Flyde to your services.
+
+Configure a webhook endpoint at `https://your-webhook-url.com/flyde` to receive events like `doc.updated` or `page.published`.
+
+<CodeGroup tabs="cURL,Node.js,Python">
+  ```bash
+  curl -X POST https://your-webhook-url.com/flyde \
+    -H "Content-Type: application/json" \
+    -d '{
+      "event": "doc.updated",
+      "docId": "doc-123",
+      "timestamp": "2024-01-15T10:00:00Z"
+    }'
+  ```
+  ```javascript
+  const express = require('express');
+  const app = express();
+  app.use(express.json());
+  
+  app.post('/flyde', (req, res) => {
+    console.log('Flyde event:', req.body.event);
+    res.status(200).send('OK');
+  });
+  
+  app.listen(3000);
+  ```
+  ```python
+  from flask import Flask, request
+  
+  app = Flask(__name__)
+  
+  @app.route('/flyde', methods=['POST'])
+  def flyde_webhook():
+      data = request.json
+      print(f'Flyde event: {data["event"]}')
+      return 'OK', 200
+  ```
+</CodeGroup>
+
+## API Access for Custom Integrations
+
+Build custom tools using Flyde's REST API at `https://api.example.com/v1`.
+
+<Request tabs="Create Doc,cURL" show-lines="true">
+  ```javascript
+  const response = await fetch('https://api.example.com/v1/docs', {
+    method: 'POST',
+    headers: {
+      'Authorization': 'Bearer YOUR_API_KEY',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      title: 'New Guide',
+      content: '# Hello Flyde'
+    })
+  });
+  ```
+  ```bash
+  curl -X POST https://api.example.com/v1/docs \
+    -H "Authorization: Bearer YOUR_API_KEY" \
+    -H "Content-Type: application/json" \
+    -d '{
+      "title": "New Guide",
+      "content": "# Hello Flyde"
+    }'
+  ```
+</Request>
+
+<Response tabs="200,401">
+  ```json
+  {
+    "id": "doc-123",
+    "title": "New Guide",
+    "status": "created"
+  }
+  ```
+  ```json
+  {
+    "error": "Unauthorized",
+    "message": "Invalid API key"
+  }
+  ```
+</Response>
+
+<ParamField path="title" param-type="string" required="true">
+  Document title, max 100 characters.
+</ParamField>
+
+<ParamField header="Authorization" param-type="string" required="true">
+  Bearer token: `Bearer YOUR_API_KEY`.
+</ParamField>
+
+<Expandable title="Advanced API Features" default-open="false">
+  Use query params for filtering:
+  
+  ```
+  GET https://api.example.com/v1/docs?status=published&limit=10
+  ```
+</Expandable>
+
+<Callout kind="info">
+  Generate your API key from the dashboard under Account > API Keys. Rotate keys regularly for security.
+</Callout>

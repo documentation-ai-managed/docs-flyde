@@ -1,0 +1,123 @@
+---
+title: Getting Started with Flyde
+description: Set up your Flyde account and create your first documentation space in just a few minutes.
+---
+
+## Prerequisites
+
+<Callout kind="info">
+
+Before you begin, ensure you have:
+
+- A modern web browser (Chrome, Firefox, or Safari)
+- An email address for account verification
+- Optional: Node.js `{>=18}` for CLI usage
+
+</Callout>
+
+## Create and Verify Your Account
+
+Follow these steps to sign up quickly.
+
+<Steps>
+  <Step title="Visit Flyde" icon="globe">
+    Navigate to `https://flyde.com` and click **Sign Up**.
+  </Step>
+  <Step title="Enter Details" icon="user">
+    Provide your email, password, and workspace name. Accept the terms.
+  </Step>
+  <Step title="Verify Email" icon="mail">
+    Check your inbox for the verification link from Flyde and click it.
+  </Step>
+  <Step title="Log In" icon="log-in">
+    Return to the site, log in, and access your dashboard.
+  </Step>
+</Steps>
+
+## Set Up Your Documentation Workspace
+
+Once logged in, configure your first space.
+
+<Steps>
+  <Step title="Create Space" icon="folder-plus">
+    Click **New Space** on the dashboard. Name it `My Project Docs`.
+  </Step>
+  <Step title="Configure Settings" icon="settings">
+    Set visibility to `Private` or `Public`. Add a description like "Project documentation hub".
+  </Step>
+  <Step title="Save Workspace" icon="save">
+    Click **Create**. Your space is ready.
+  </Step>
+</Steps>
+
+## Upload Your First Document
+
+Upload content via browser or API.
+
+<Tabs>
+  <Tab title="Browser Upload" icon="upload">
+    In your space, click **Upload Document**.
+
+    Drag and drop a Markdown file or select **Markdown**, **PDF**, or **Project ZIP**.
+
+    Add a title and slug, then **Publish**.
+  </Tab>
+  <Tab title="API Upload" icon="api">
+    Use the Flyde API to upload programmatically.
+
+    <Request tabs="cURL,JavaScript" show-lines="true">
+      ```bash
+      curl -X POST https://api.example.com/v1/spaces/{SPACE_ID}/documents \
+        -H "Authorization: Bearer YOUR_API_KEY" \
+        -F "file=@/path/to/doc.md" \
+        -F "title=My First Doc"
+      ```
+      ````javascript
+      const formData = new FormData();
+      formData.append('file', documentFile);
+      formData.append('title', 'My First Doc');
+
+      const response = await fetch(`https://api.example.com/v1/spaces/${SPACE_ID}/documents`, {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${YOUR_API_KEY}` },
+        body: formData,
+      });
+      ````
+    </Request>
+
+    Replace `{SPACE_ID}` and `YOUR_API_KEY` with your values.
+  </Tab>
+</Tabs>
+
+<Callout kind="tip">
+  Browser upload suits quick tests. Use API for automation.
+</Callout>
+
+## Dashboard Tour
+
+Explore key areas with these feature highlights.
+
+<Columns cols={3}>
+  <Card title="Spaces" icon="library" href="#">
+    Manage all your documentation spaces here.
+  </Card>
+  <Card title="Documents" icon="file-text" href="#">
+    Edit, preview, and publish your docs.
+  </Card>
+  <Card title="Settings" icon="settings" href="#">
+    Configure API keys, webhooks, and integrations.
+  </Card>
+</Columns>
+
+## Next Steps
+
+<Columns cols={2}>
+  <Card title="Authentication" icon="shield" href="/authentication">
+    Secure your API access.
+  </Card>
+  <Card title="Advanced Configuration" icon="sliders" href="/configuration">
+    Customize your workspace.
+  </Card>
+</Columns>
+
+Congratulations! You've set up Flyde. Dive into [editing docs](/introduction) next.
